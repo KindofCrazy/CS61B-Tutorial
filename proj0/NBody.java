@@ -69,12 +69,12 @@ public class NBody {
         }
 
         // Printing the Universe
-        StdOut.printf("%d\n", planets.length);
+        StdOut.printf("%d\n", planet.length);
         StdOut.printf("%.2e\n", radius);
-        for (int i = 0; i < planets.length; i++) {
+        for (int i = 0; i < planet.length; i++) {
             StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-                    planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
-                    planets[i].yyVel, planets[i].mass, planets[i].imgFileName);
+                    planet[i].xxPos, planet[i].yyPos, planet[i].xxVel,
+                    planet[i].yyVel, planet[i].mass, planet[i].imgFileName);
         }
     }
 }
