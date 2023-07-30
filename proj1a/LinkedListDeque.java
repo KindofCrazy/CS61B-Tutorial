@@ -103,6 +103,7 @@ public class LinkedListDeque<T> {
 
         return get(ptr.next, index - 1);
     }
+    
     public T getRecursive(int index) {
         if (index > size - 1) {
             return null;

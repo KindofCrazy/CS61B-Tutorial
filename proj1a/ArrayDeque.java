@@ -21,8 +21,9 @@ public class ArrayDeque<T> {
         }
         newArray[size - 1] = items[minusOne(nextLast)];
     }
+
     private void resizeBigger() {
-        T[] newArray = (T[]) new Object[size * 2];
+        T[] newArray = (T[]) new Object[items.length * 2];
 
         copy(newArray);
 
