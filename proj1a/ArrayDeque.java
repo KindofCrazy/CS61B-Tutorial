@@ -1,4 +1,4 @@
-public class ArrayDeque<T>{
+public class ArrayDeque<T> {
     private int size;
     private T[] items;
     private int nextFirst;
@@ -14,7 +14,8 @@ public class ArrayDeque<T>{
     private void copy(T[] newArray) {
         int newIndex = 0;
 
-        for(int index = addOne(nextFirst), finalIndex = minusOne(nextLast);index != finalIndex ;index = addOne(index)) {
+        for (int index = addOne(nextFirst), finalIndex = minusOne(nextLast);
+            index != finalIndex; index = addOne(index)) {
             newArray[newIndex] = items[index];
             newIndex++;
         }
@@ -31,7 +32,7 @@ public class ArrayDeque<T>{
     }
 
     private void resizeSmaller() {
-        T[] newArray = (T[]) new Object[size / 2];
+        T[] newArray = (T[]) new Object[items.length / 2];
 
         copy(newArray);
 

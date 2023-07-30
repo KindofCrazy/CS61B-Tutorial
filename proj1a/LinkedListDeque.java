@@ -1,6 +1,6 @@
 public class LinkedListDeque<T> {
     private class StuffNode {
-        final private T item;
+        private final T item;
         private StuffNode prev;
         private StuffNode next;
         public StuffNode(T i, StuffNode p, StuffNode n) {
@@ -17,7 +17,7 @@ public class LinkedListDeque<T> {
     }
 
     private int size;
-    final private StuffNode sentinel;
+    private final StuffNode sentinel;
 
     public LinkedListDeque() {
         sentinel = new StuffNode();
