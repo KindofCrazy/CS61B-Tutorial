@@ -13,12 +13,12 @@ public class ArrayDeque<T>{
 
     private void copy(T[] newArray) {
         int newIndex = 0;
-        int index = nextFirst;
-        int finalIndex = (nextLast - 1) % items.length;
-        while (index != finalIndex) {
-            index = (index + 1) % items.length;
+
+        for(int index = addOne(nextFirst), finalIndex = minusOne(nextLast);index != finalIndex ;index = addOne(index)) {
             newArray[newIndex] = items[index];
+            newIndex++;
         }
+        newArray[size - 1] = items[minusOne(nextLast)];
     }
     private void resizeBigger() {
         T[] newArray = (T[]) new Object[size * 2];
@@ -41,7 +41,10 @@ public class ArrayDeque<T>{
     }
 
     private int minusOne(int index) {
-        return (index - 1) % items.length;
+        if (index - 1 >= 0) {
+            return index - 1;
+        }
+        return items.length - 1;
     }
 
     private int addOne(int index) {
@@ -72,7 +75,7 @@ public class ArrayDeque<T>{
         return size == 0;
     }
 
-    public boolean isMostEmpty() {
+    private boolean isMostEmpty() {
         if (items.length >= 16) {
             return (double) size / items.length < 0.25;
         }
@@ -102,6 +105,7 @@ public class ArrayDeque<T>{
         }
 
         nextFirst = addOne(nextFirst);
+        T res = items[nextFirst];
         items[nextFirst] = null;
         size--;
 
@@ -109,7 +113,7 @@ public class ArrayDeque<T>{
             resizeSmaller();
         }
 
-        return items[addOne(nextFirst)];
+        return res;
     }
 
     public T removeLast() {
@@ -117,6 +121,7 @@ public class ArrayDeque<T>{
             return null;
         }
         nextLast = minusOne(nextLast);
+        T res = items[nextLast];
         items[nextLast] = null;
         size--;
 
@@ -124,7 +129,7 @@ public class ArrayDeque<T>{
             resizeSmaller();
         }
 
-        return items[minusOne(nextLast)];
+        return res;
     }
 
     public T get(int index) {
