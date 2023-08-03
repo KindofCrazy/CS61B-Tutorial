@@ -18,6 +18,7 @@ public class Palindrome {
         }
         return isPalindromeHelper(d);
     }
+
     public boolean isPalindrome(String word) {
         /* Using Deque recursively */
         return isPalindromeHelper(wordToDeque(word));
@@ -46,6 +47,7 @@ public class Palindrome {
         }
         return isPalindromeHelperCc(d, cc);
     }
+
     public boolean isPalindrome(String word, CharacterComparator cc) {
         return isPalindromeHelperCc(wordToDeque(word), cc);
     }

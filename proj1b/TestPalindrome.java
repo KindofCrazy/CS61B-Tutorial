@@ -35,5 +35,10 @@ public class TestPalindrome {
 
         assertFalse(palindrome.isPalindrome("ac", offByOne));
         assertFalse(palindrome.isPalindrome("aB", offByOne));
+
+        OffByN offBy5 = new OffByN(5);
+        assertTrue(palindrome.isPalindrome("", offBy5));
+        assertTrue(palindrome.isPalindrome("af", offBy5));
+        assertFalse(palindrome.isPalindrome("fh", offBy5));
     }
 }
