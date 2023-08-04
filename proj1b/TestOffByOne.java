@@ -6,6 +6,8 @@ public class TestOffByOne {
     // new ones, or the autograder might be upset.
     static CharacterComparator offByOne = new OffByOne();
 
+
+    // Your tests go here.
     @Test
     public void testEqualChars() {
         assertTrue(offByOne.equalChars('a', 'b'));
@@ -19,6 +21,6 @@ public class TestOffByOne {
 
         assertFalse(offByOne.equalChars('a', 'B'));
     }
-    // Your tests go here.
+
 
 }
