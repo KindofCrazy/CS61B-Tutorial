@@ -76,7 +76,7 @@ public class MemoryGame {
         for (int i = 0; i < letters.length(); i++) {
             StdDraw.clear(Color.BLACK);
             StdDraw.pause(500);
-            StdDraw.text((double) width / 2, (double) height / 2, letters.substring(i, i));
+            StdDraw.text((double) width / 2, (double) height / 2, letters.substring(i, i + 1));
             StdDraw.show();
             StdDraw.pause(1000);
         }
