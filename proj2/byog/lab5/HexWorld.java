@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class HexWorld {
 
-    public static class Position {
+    private static class Position {
         private int x;
         private int y;
 
