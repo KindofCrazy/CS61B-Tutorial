@@ -30,6 +30,7 @@ public class HexWorld {
             return y;
         }
     }
+
     /**
      * @param s The size of the hex
      * @param i The row numbers where i = 0 is the bottom row
