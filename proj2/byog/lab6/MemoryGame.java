@@ -91,7 +91,6 @@ public class MemoryGame {
             }
             drawFrame(string.toString());
         }
-
         return string.toString();
     }
 
