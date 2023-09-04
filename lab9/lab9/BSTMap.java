@@ -47,7 +47,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         if (p == null) {
             return null;
         }
-        if (p.key.compareTo(key) == 0) {
+        if (key.compareTo(p.key) == 0) {
             return p.value;
         }
 
@@ -88,6 +88,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     @Override
     public void put(K key, V value) {
+        size++;
+        if (root == null) {
+            root = new Node(key, value);
+
+        }
         putHelper(key, value, root);
     }
 
