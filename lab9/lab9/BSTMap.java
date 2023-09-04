@@ -1,5 +1,8 @@
 package lab9;
 
+import edu.princeton.cs.algs4.SET;
+
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -105,18 +108,94 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
 
     /* Returns a Set view of the keys contained in this map. */
-    @Override
-    public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+
+    private Set<K> keySetHelper(Set<K> keyset, Node p) {
+        if (p == null) {
+            return keyset;
+        }
+        keyset.add(p.key);
+        Set<K> leftSet = keySetHelper(keyset, p.left);
+        return keySetHelper(leftSet, p.right);
     }
 
+    @Override
+    public Set<K> keySet() {
+        Set<K> keyset = new HashSet<>();
+        return keySetHelper(keyset, root);
+    }
+
+    private void catLeft(Node root) {
+        if (root.left.left == null) {
+            root.left = root.left.right;
+            return;
+        }
+        if (root.left.right == null) {
+            root.left = root.left.left;
+            return;
+        }
+        Node p = root.left;
+        while(p.right != null) {
+            p = p.right;
+        }
+        p.right = root.left.right;
+
+        root.left = root.left.left;
+    }
+
+    private void catRight(Node root) {
+        if (root.right.left == null) {
+            root.right = root.right.right;
+            return;
+        }
+        if (root.right.right == null) {
+            root.right = root.right.left;
+            return;
+        }
+        Node p = root.right;
+        while(p.left != null) {
+            p = p.left;
+        }
+        p.left = root.right.left;
+
+        root.right = root.right.right;
+    }
+
+    private V removeHelper(K key, Node p) {
+        if (key.compareTo(p.key) < 0) {
+            if (key.compareTo(p.left.key) == 0) {
+                V returnValue = p.left.value;
+                catLeft(p);
+                return returnValue;
+            }
+            return removeHelper(key, p.left);
+        }
+
+        if (key.compareTo(p.key) > 0) {
+            if (key.compareTo(p.right.key) == 0) {
+                V returnValue = p.right.value;
+                catRight(p);
+                return returnValue;
+            }
+            return removeHelper(key, p.right);
+        }
+    }
     /** Removes KEY from the tree if present
      *  returns VALUE removed,
      *  null on failed removal.
      */
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        if (!containsKey(key)) {
+            return null;
+        }
+
+        if (key.compareTo(root.key) == 0) {
+            V returnValue = root.value;
+            this.clear();
+            return returnValue;
+        }
+
+        return removeHelper(key, root);
     }
 
     /** Removes the key-value entry for the specified key only if it is
@@ -125,7 +204,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      **/
     @Override
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (get(key) == value) {
+            return remove(key);
+        }
+        return null;
     }
 
     @Override
