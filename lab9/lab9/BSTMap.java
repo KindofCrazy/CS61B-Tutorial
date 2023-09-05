@@ -136,7 +136,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             root.left = root.left.left;
             return;
         }
-        Node p = root.left;
+        Node p = root.left.left;
         while(p.right != null) {
             p = p.right;
         }
@@ -154,7 +154,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             root.right = root.right.left;
             return;
         }
-        Node p = root.right;
+        Node p = root.right.right;
         while(p.left != null) {
             p = p.left;
         }

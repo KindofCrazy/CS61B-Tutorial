@@ -2,6 +2,7 @@ package lab9tester;
 
 import static org.junit.Assert.*;
 
+import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 import lab9.BSTMap;
 
@@ -98,6 +99,21 @@ public class TestBSTMap {
         b.put("java", 4);
         System.out.println(b.keySet());
         b.put("Yolo", 5);
+        System.out.println(b.keySet());
+    }
+
+    @Test
+    public void sanityRemoveRootTest() {
+        BSTMap<String, Integer> b = new BSTMap<>();
+        b.put("d", 0);
+        b.put("b", 0);
+        b.put("a", 0);
+        b.put("c", 0);
+        b.put("f", 0);
+        b.put("e", 0);
+        b.put("g", 0);
+
+        b.remove("b");
         System.out.println(b.keySet());
     }
 
