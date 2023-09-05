@@ -164,7 +164,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         //TODO root = null or p = null ?
         if (key.compareTo(p.key) == 0) {
             V returnValue = p.value;
-            p = null;
+            root = null;
             return returnValue;
         }
 
