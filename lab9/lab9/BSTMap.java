@@ -190,6 +190,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         }
         if (root.right == null) {
             root = root.left;
+            return returnValue;
         }
 
         Node p = root.right;

@@ -113,7 +113,7 @@ public class TestBSTMap {
         b.put("e", 0);
         b.put("g", 0);
 
-        b.remove("b");
+        b.remove("f");
         System.out.println(b.keySet());
     }
 
