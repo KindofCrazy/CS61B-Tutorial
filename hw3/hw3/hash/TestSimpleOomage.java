@@ -1,5 +1,6 @@
 package hw3.hash;
 
+import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -29,6 +30,16 @@ public class TestSimpleOomage {
           meaning no two SimpleOomages should EVER have the same
           hashCode UNLESS they have the same red, blue, and green values!
          */
+        int maxValue = 255;
+        Set<Integer> hashCodeSet = new HashSet<>();
+        for (int red = 0; red <= maxValue; red += 5) {
+            for (int green = 0; green <= maxValue; green += 5) {
+                for (int blue = 0; blue <= maxValue; blue += 5) {
+                    hashCodeSet.add(new SimpleOomage(red, green, blue).hashCode());
+                }
+            }
+        }
+        assertEquals((int) Math.pow(52, 3), hashCodeSet.size());
     }
 
     @Test
@@ -42,7 +53,7 @@ public class TestSimpleOomage {
         assertNotEquals(ooA, "ketchup");
     }
 
-    /*
+
     @Test
     public void testHashCodeAndEqualsConsistency() {
         SimpleOomage ooA = new SimpleOomage(5, 10, 20);
@@ -50,7 +61,9 @@ public class TestSimpleOomage {
         HashSet<SimpleOomage> hashSet = new HashSet<>();
         hashSet.add(ooA);
         assertTrue(hashSet.contains(ooA2));
-    }*/
+    }
+
+
 
     /* TODO: Uncomment this test after you finish haveNiceHashCode Spread in OomageTestUtility */
     /*@Test
