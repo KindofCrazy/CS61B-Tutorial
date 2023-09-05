@@ -177,14 +177,14 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             return removeHelper(key, p.left);
         }
 
-        if (key.compareTo(p.key) > 0) {
-            if (key.compareTo(p.right.key) == 0) {
+
+        if (key.compareTo(p.right.key) == 0) {
                 V returnValue = p.right.value;
                 catRight(p);
                 return returnValue;
             }
-            return removeHelper(key, p.right);
-        }
+        return removeHelper(key, p.right);
+
     }
 
     /** Removes KEY from the tree if present
@@ -215,6 +215,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public Iterator<K> iterator() {
-        throw new UnsupportedOperationException();
+        return keySet().iterator();
     }
 }
