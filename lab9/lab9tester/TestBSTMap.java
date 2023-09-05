@@ -89,15 +89,17 @@ public class TestBSTMap {
         assertTrue(b.get("hi") != null);
     }
 
-//    @Test
-//    public void sanityKeySetTest() {
-//        BSTMap<String, Integer> b = new BSTMap<>();
-//        b.put("hello", 1);
-//        b.put("world", 2);
-//        b.put("in", 3);
-//        b.put("java", 4);
-//        Set<String> expected = new HashSet<>();
-//    }
+    @Test
+    public void sanityKeySetTest() {
+        BSTMap<String, Integer> b = new BSTMap<>();
+        b.put("hello", 1);
+        b.put("world", 2);
+        b.put("in", 3);
+        b.put("java", 4);
+        System.out.println(b.keySet());
+        b.put("Yolo", 5);
+        System.out.println(b.keySet());
+    }
 
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestBSTMap.class);

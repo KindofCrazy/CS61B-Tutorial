@@ -114,8 +114,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             return keyset;
         }
         keyset.add(p.key);
-        Set<K> leftSet = keySetHelper(keyset, p.left);
-        return keySetHelper(leftSet, p.right);
+        Set<K> leftSet = keySetHelper(new HashSet<>(), p.left);
+        Set<K> rightSet = keySetHelper(new HashSet<>(), p.right);
+        keyset.addAll(leftSet);
+        keyset.addAll(rightSet);
+        return keyset;
     }
 
     @Override
@@ -124,7 +127,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         return keySetHelper(keyset, root);
     }
 
-    private void catLeft(Node root) {
+    private void concatRightToLeft(Node root) {
         if (root.left.left == null) {
             root.left = root.left.right;
             return;
@@ -142,7 +145,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         root.left = root.left.left;
     }
 
-    private void catRight(Node root) {
+    private void concatLeftToRight(Node root) {
         if (root.right.left == null) {
             root.right = root.right.right;
             return;
@@ -161,32 +164,42 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     }
 
     private V removeHelper(K key, Node p) {
-        //TODO root = null or p = null ?
-        if (key.compareTo(p.key) == 0) {
-            V returnValue = p.value;
-            root = null;
-            return returnValue;
-        }
-
         if (key.compareTo(p.key) < 0) {
             if (key.compareTo(p.left.key) == 0) {
                 V returnValue = p.left.value;
-                catLeft(p);
+                concatRightToLeft(p);
                 return returnValue;
             }
             return removeHelper(key, p.left);
         }
 
-
         if (key.compareTo(p.right.key) == 0) {
                 V returnValue = p.right.value;
-                catRight(p);
+                concatLeftToRight(p);
                 return returnValue;
             }
         return removeHelper(key, p.right);
 
     }
 
+    private V removeRoot() {
+        V returnValue = root.value;
+        if (root.left == null) {
+            root = root.right;
+            return returnValue;
+        }
+        if (root.right == null) {
+            root = root.left;
+        }
+
+        Node p = root.right;
+        while(p.left != null) {
+            p = p.left;
+        }
+        p.left = root.left;
+        root = root.right;
+        return returnValue;
+    }
     /** Removes KEY from the tree if present
      *  returns VALUE removed,
      *  null on failed removal.
@@ -198,6 +211,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         }
 
         size--;
+
+        if (key.equals(root.key)) {
+            return removeRoot();
+        }
+
         return removeHelper(key, root);
     }
 
