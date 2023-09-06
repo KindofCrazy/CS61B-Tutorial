@@ -1,5 +1,6 @@
 package hw3.hash;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -45,13 +46,15 @@ public class TestComplexOomage {
         /* Your testWithDeadlyParams method failed, even when we replaced ComplexOomage's hash code
          with something better. Specifically, for this test, it simply uses params.hashCode(), i.e.
          the default implementation of hashCode for lists. It's possible you have simply identified
-         a case where the built-in hashCode for Lists performs badly. More likely, your test always fails
-         even if the hash code is good.
+         a case where the built-in hashCode for Lists performs badly.
+         More likely, your test always fails even if the hash code is good.
          */
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 100; i++) {
             List<Integer> list = new ArrayList<>();
-            list.add(1);
+            for (int j = 0; j < 4; j++) {
+                list.add(StdRandom.uniform(255));
+            }
             for (int j = 0; j < 4; j++) {
                 list.add(j);
             }
