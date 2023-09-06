@@ -48,6 +48,7 @@ public class TestComplexOomage {
          a case where the built-in hashCode for Lists performs badly. More likely, your test always fails
          even if the hash code is good.
          */
+
         for (int i = 0; i < 5; i++) {
             List<Integer> list = new ArrayList<>();
             list.add(1);
