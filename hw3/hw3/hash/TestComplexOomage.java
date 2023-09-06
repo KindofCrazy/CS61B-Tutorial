@@ -44,7 +44,7 @@ public class TestComplexOomage {
         // Your code here.
         for (int i = 0; i < 10; i++) {
             List<Integer> list = new ArrayList<>();
-            list.add(1);
+            list.add(256);
             for (int j = 0; j < 4; j++) {
                 list.add(j);
             }
