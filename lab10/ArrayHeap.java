@@ -202,12 +202,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         if (!inBounds(index)) {
             throw new IllegalArgumentException("Given item is not in this Priority Queue");
         }
-        if (getNode(index).priority() < getNode(parentIndex(index)).priority()) {
-            swim(index);
-        }
-        else {
-            sink(index);
-        }
+        contents[index].myPriority = priority;
+        swim(index);
+        sink(index);
     }
 
     /**
