@@ -167,9 +167,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     public T removeMin() {
         T returnValue = getNode(1).item();
         swap(1, size);
-        sink(1);
         contents[size] = null;
         size--;
+        sink(1);
         return returnValue;
     }
 
@@ -199,6 +199,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
                 break;
             }
         }
+
         if (!inBounds(index)) {
             throw new IllegalArgumentException("Given item is not in this Priority Queue");
         }
