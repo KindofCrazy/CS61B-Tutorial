@@ -119,6 +119,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * Bubbles down the node currently at the given index.
      */
     private void sink(int index) {
+        // When there is only one element in the queue,
+        // Absence of this judgment will causes a IllegalArgumentException
+        // when calling validateSinkSwimArg(index)
         if (!inBounds(index)) {
             return;
         }
