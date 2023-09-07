@@ -1,5 +1,6 @@
 package lab11.graphs;
 
+import edu.princeton.cs.algs4.Stack;
 /**
  *  @author Josh Hug
  */
@@ -16,7 +17,7 @@ public class MazeCycles extends MazeExplorer {
 
     @Override
     public void solve() {
-        // TODO: Your code here!
+        Stack<Integer> stack = new Stack<>();
     }
 
     // Helper methods go here

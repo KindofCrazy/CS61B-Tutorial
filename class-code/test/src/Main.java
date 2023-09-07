@@ -1,13 +1,18 @@
 public class Main {
     public static void main(String[] args) {
-        printParty(3);
+        int n = 10;
+        int k = 3;
+        System.out.println(n + mySmoke(n, k));
     }
 
-    public static void printParty(int N) {
-        for (int i = 1; i <= N; i = i * 2) {
-            for (int j = 0; j < i; j++) {
-                System.out.println("hello");
-            }
+    public static int mySmoke(int n, int k) {
+        if (n < k) {
+            return 0;
         }
+        return n / k + mySmoke(n / k, k);
+    }
+
+    public static int otherSmoke(int n, int k) {
+
     }
 }
