@@ -129,7 +129,7 @@ public class Solver {
         return solution;
     }
 
-    public int enqueueCount() {
+    private int enqueueCount() {
         return enqueueCount;
     }
 }
