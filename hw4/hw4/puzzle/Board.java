@@ -6,7 +6,7 @@ public class Board implements WorldState {
 
     private static final int BLANK = 0;
     private int[][] tiles;
-    private int N;
+    private int size;
 
 
 
@@ -14,8 +14,11 @@ public class Board implements WorldState {
      tiles[i][j] = tile at row i, column j
      */
     public Board(int[][] tiles) {
-        this.tiles = tiles;
-        this.N = tiles.length;
+        this.size = tiles.length;
+        this.tiles = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            System.arraycopy(tiles[i], 0, this.tiles[i], 0, size);
+        }
     }
 
     /* Returns value of tile at row i, column j (or 0 if blank) */
@@ -25,7 +28,7 @@ public class Board implements WorldState {
 
     /* Returns the board size N */
     public int size() {
-        return N;
+        return size;
     }
 
     /* Returns the neighbors of the current board */
@@ -69,11 +72,11 @@ public class Board implements WorldState {
         int estimatedValue = 0;
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
-                if (i == N - 1 && j == N - 1) {
+                if (i == size - 1 && j == size - 1) {
                     break;
                 }
 
-                if (tiles[i][j] != N * i + j + 1) {
+                if (tiles[i][j] != size * i + j + 1) {
                     estimatedValue++;
                 }
             }
@@ -82,8 +85,8 @@ public class Board implements WorldState {
     }
 
     private int manhattanDistance(int value, int curX, int curY) {
-        int goalX = (value - 1) / N;
-        int goalY = (value - 1) % N;
+        int goalX = (value - 1) / size;
+        int goalY = (value - 1) % size;
 
         return Math.abs(goalX - curX) + Math.abs(goalY - curY);
     }
@@ -154,6 +157,10 @@ public class Board implements WorldState {
 
     }
 
+    public int hashCode() {
+        return size;
+    }
+
     /** Returns the string representation of the board. 
       * Uncomment this method. */
     public String toString() {
@@ -162,7 +169,7 @@ public class Board implements WorldState {
         s.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                s.append(String.format("%2d ", tileAt(i,j)));
+                s.append(String.format("%2d ", tileAt(i, j)));
             }
             s.append("\n");
         }

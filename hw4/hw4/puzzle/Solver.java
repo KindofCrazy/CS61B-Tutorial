@@ -1,11 +1,7 @@
 package hw4.puzzle;
 
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
-import edu.princeton.cs.algs4.StdRandom;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,11 +11,11 @@ public class Solver {
     private int moves;
     private List<WorldState> solution;
     private SearchNode lastSearchNode;
-    public int enqueueCount = 0;
+    private int enqueueCount = 0;
     private HashMap<WorldState, Integer> estimatedDistance = new HashMap<>();
 
 
-    private class SearchNode implements Comparable<SearchNode>{
+    private class SearchNode implements Comparable<SearchNode> {
         private final WorldState worldState;
         private final int moves;
         private final SearchNode previous;
@@ -131,5 +127,9 @@ public class Solver {
      */
     public Iterable<WorldState> solution() {
         return solution;
+    }
+
+    public int enqueueCount() {
+        return enqueueCount;
     }
 }
