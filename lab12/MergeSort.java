@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
 
 import java.awt.desktop.QuitResponse;
@@ -76,7 +77,7 @@ public class MergeSort {
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
-        if (items.size() == 1) {
+        if ( items.isEmpty() || items.size() == 1) {
             return items;
         }
         Queue<Queue<Item>> singleItemQueues = makeSingleItemQueues(items);
@@ -88,17 +89,35 @@ public class MergeSort {
         while (!singleItemQueues.isEmpty()) {
             rightHalf.enqueue(singleItemQueues.dequeue().dequeue());
         }
+        leftHalf = mergeSort(leftHalf);
+        rightHalf = mergeSort(rightHalf);
         return mergeSortedQueues(leftHalf, rightHalf);
     }
 
     public static void main(String[] args) {
-        Queue<String> students = new Queue<>();
-        students.enqueue("Bob");
-        students.enqueue("Cathy");
-        students.enqueue("Alice");
-        System.out.println(students);
-        Queue<String> sortedStudents = MergeSort.mergeSort(students);
-        System.out.println(students);
-        System.out.println(sortedStudents);
+//        Queue<String> students = new Queue<>();
+//        students.enqueue("Bob");
+//        students.enqueue("Cathy");
+//        students.enqueue("Alice");
+//        System.out.println(students);
+//        Queue<String> sortedStudents = MergeSort.mergeSort(students);
+//        System.out.println(students);
+//        System.out.println(sortedStudents);
+
+        /* 1 6 8 4 4 9 4 3 3 2 */
+        Queue<Integer> queue = new Queue<>();
+        queue.enqueue(1);
+        queue.enqueue(6);
+        queue.enqueue(8);
+        queue.enqueue(4);
+        queue.enqueue(4);
+        queue.enqueue(9);
+        queue.enqueue(4);
+        queue.enqueue(3);
+        queue.enqueue(3);
+        queue.enqueue(2);
+        Queue<Integer> sortedQueue = MergeSort.mergeSort(queue);
+        System.out.println(queue);
+        System.out.println(sortedQueue);
     }
 }
