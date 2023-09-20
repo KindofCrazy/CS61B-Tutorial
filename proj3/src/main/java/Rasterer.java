@@ -13,6 +13,8 @@ public class Rasterer {
         // YOUR CODE HERE
     }
 
+
+
     /**
      * Takes a user query and finds the grid of images that best matches the query. These
      * images will be combined into one big image (rastered) by the front end. <br>
@@ -46,7 +48,22 @@ public class Rasterer {
         Map<String, Object> results = new HashMap<>();
         System.out.println("Since you haven't implemented getMapRaster, nothing is displayed in "
                            + "your browser.");
+
+        double lrlon = params.get("lrlon");
+        double ullon = params.get("ullon");
+        double w = params.get("w");
+        double h = params.get("h");
+        double ullat = params.get("ullat");
+        double lrlat = params.get("lrlat");
+
+        double LonDPP = (lrlon - ullon) / w;
+        boolean query_success = isValidate(lrlon, ullon, lrlat, ullat);
+
         return results;
+    }
+
+    private boolean isValidate(double lrlon, double ullon, double ullat, double lrlat) {
+        
     }
 
 }

@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Class with 2 ways of doing Counting sort, one naive way and one "better" way
  *
@@ -57,6 +59,14 @@ public class CountingSort {
         return sorted;
     }
 
+
+    private static int offSetValue(int offSet, int originalValue) {
+        return originalValue + offSet;
+    }
+
+    private static int originalValue(int offSet, int offSetValue) {
+        return offSetValue - offSet;
+    }
     /**
      * Counting sort on the given int array, must work even with negative numbers.
      * Note, this code does not need to work for ranges of numbers greater
@@ -66,7 +76,44 @@ public class CountingSort {
      * @param arr int array that will be sorted
      */
     public static int[] betterCountingSort(int[] arr) {
-        // TODO make counting sort work with arrays containing negative numbers.
-        return null;
+        int offSet = 10000000;
+
+        // find max
+        int max = Integer.MIN_VALUE;
+        for (int i : arr) {
+            max = Math.max(max, offSetValue(offSet, i));
+        }
+
+        // gather all the counts for each value
+        int[] counts = new int[max + 1];
+        for (int i : arr) {
+            counts[offSetValue(offSet, i)]++;
+        }
+
+        int[] starts = new int[max + 1];
+        int pos = 0;
+        for (int i = 0; i < starts.length; i += 1) {
+            starts[i] = pos;
+            pos += counts[i];
+        }
+
+        int[] sorted = new int[arr.length];
+        for (int i = 0; i < arr.length; i += 1) {
+            int item = arr[i];
+            int place = starts[offSetValue(offSet, item)];
+            sorted[place] = item;
+            starts[offSetValue(offSet, item)] += 1;
+        }
+
+        // return the sorted array
+        return sorted;
+    }
+
+    public static void main(String[] args) {
+        //int[] nonNegative = {1, 2, 3};
+        int[] nonNegative = {9, 5, 2, 1, 5, 3, 0, 3, 1, 1};
+        int[] someNegative = {9, 5, -4, 2, 1, -2, 5, 3, 0, -2, 3, 1, 1};
+
+        System.out.println(Arrays.toString(betterCountingSort(someNegative)));
     }
 }
