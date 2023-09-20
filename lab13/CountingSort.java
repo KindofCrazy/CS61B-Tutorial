@@ -74,7 +74,7 @@ public class CountingSort {
      * @param arr int array that will be sorted
      */
     public static int[] betterCountingSort(int[] arr) {
-        int offSet = 10000000;
+        int offSet = 100000000;
 
         // find max
         int max = Integer.MIN_VALUE;
