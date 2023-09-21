@@ -57,7 +57,21 @@ public class CountingSort {
         return sorted;
     }
 
+    private static int properOffSet(int[] arr) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
 
+        for (int i : arr) {
+            min = Math.min(min, i);
+        }
+
+        if (min >= 0) {
+            return 0;
+        }
+        else {
+            return -min;
+        }
+    }
     private static int offSetValue(int offSet, int originalValue) {
         return originalValue + offSet;
     }
@@ -74,7 +88,7 @@ public class CountingSort {
      * @param arr int array that will be sorted
      */
     public static int[] betterCountingSort(int[] arr) {
-        int offSet = 1000000;
+        int offSet = properOffSet(arr);
 
         // find max
         int max = Integer.MIN_VALUE;
