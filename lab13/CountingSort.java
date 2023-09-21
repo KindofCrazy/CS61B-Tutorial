@@ -59,7 +59,6 @@ public class CountingSort {
 
     private static int properOffSet(int[] arr) {
         int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
 
         for (int i : arr) {
             min = Math.min(min, i);
