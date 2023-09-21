@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * Class for doing Radix sort
  *
@@ -17,7 +20,13 @@ public class RadixSort {
      */
     public static String[] sort(String[] asciis) {
         // TODO: Implement LSD Sort
-        return null;
+        String[] sorted = new String[asciis.length];
+        System.arraycopy(asciis, 0, sorted, 0, asciis.length);
+        for (int i = sorted.length - 1; i >= 0; i--) {
+            sortHelperLSD(sorted, i);
+        }
+
+        return sorted;
     }
 
     /**
@@ -28,7 +37,29 @@ public class RadixSort {
      */
     private static void sortHelperLSD(String[] asciis, int index) {
         // Optional LSD helper method for required LSD radix sort
-        return;
+        int radix = 256;
+        int[] counts = new int[radix];
+        int[] starts = new int[radix];
+
+        for (String s : asciis) {
+            counts[(int) s.charAt(index)]++;
+        }
+
+        int pos = 0;
+        for (int i = 0; i < starts.length; i += 1) {
+            starts[i] = pos;
+            pos += counts[i];
+        }
+
+        String[] sorted = new String[asciis.length];
+
+        for (String item : asciis) {
+            int place = starts[(int) item.charAt(index)];
+            sorted[place] = item;
+            starts[(int) item.charAt(index)]++;
+        }
+
+        System.arraycopy(sorted, 0, asciis, 0, sorted.length);
     }
 
     /**
