@@ -66,8 +66,7 @@ public class CountingSort {
 
         if (min >= 0) {
             return 0;
-        }
-        else {
+        } else {
             return -min;
         }
     }
