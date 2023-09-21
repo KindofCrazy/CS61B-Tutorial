@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -22,6 +21,7 @@ public class RadixSort {
         // TODO: Implement LSD Sort
         String[] sorted = new String[asciis.length];
         System.arraycopy(asciis, 0, sorted, 0, asciis.length);
+
         for (int i = sorted.length - 1; i >= 0; i--) {
             sortHelperLSD(sorted, i);
         }
@@ -37,12 +37,18 @@ public class RadixSort {
      */
     private static void sortHelperLSD(String[] asciis, int index) {
         // Optional LSD helper method for required LSD radix sort
-        int radix = 256;
+        int radix = 257;
         int[] counts = new int[radix];
         int[] starts = new int[radix];
-
+        /* index i = 0 indicates there is a placeholder
+        * and all the other character's index plus 1 */
         for (String s : asciis) {
-            counts[(int) s.charAt(index)]++;
+            if (index >= s.length()) {
+                counts[0]++;
+            }
+            else {
+                counts[(int) s.charAt(index) + 1]++;
+            }
         }
 
         int pos = 0;
@@ -54,9 +60,13 @@ public class RadixSort {
         String[] sorted = new String[asciis.length];
 
         for (String item : asciis) {
-            int place = starts[(int) item.charAt(index)];
+            int itemIndex = 0;
+            if (index < item.length()) {
+                itemIndex = (int) item.charAt(index) + 1;
+            }
+            int place = starts[itemIndex];
             sorted[place] = item;
-            starts[(int) item.charAt(index)]++;
+            starts[itemIndex]++;
         }
 
         System.arraycopy(sorted, 0, asciis, 0, sorted.length);
@@ -75,5 +85,10 @@ public class RadixSort {
     private static void sortHelperMSD(String[] asciis, int start, int end, int index) {
         // Optional MSD helper method for optional MSD radix sort
         return;
+    }
+
+    public static void main(String[] args) {
+        String[] s = new String[]{"a", "b", "c"};
+        System.out.println(Arrays.toString(sort(s)));
     }
 }
